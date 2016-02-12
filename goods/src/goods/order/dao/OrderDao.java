@@ -24,6 +24,27 @@ import cn.itcast.jdbc.TxQueryRunner;
 public class OrderDao {
 	private QueryRunner qr = new TxQueryRunner();
 	/**
+	 * 修改订单状态
+	 * @param oid
+	 * @param status
+	 * @throws SQLException
+	 */
+	public void updateStatus(String oid,int status) throws SQLException{
+		String sql = "update t_order set status = ? where oid = ?";
+		qr.update(sql,status,oid);
+	}
+	/**
+	 * 查询订单状态
+	 * @param oid
+	 * @return
+	 * @throws SQLException
+	 */
+	public int queryStatus(String oid) throws SQLException{
+		String sql  = "select status from t_order where oid = ?";
+		Number  number = (Number) qr.query(sql, new ScalarHandler(),oid);
+		return number.intValue();
+	}
+	/**
 	 * 加载订单
 	 * @param oid
 	 * @return
