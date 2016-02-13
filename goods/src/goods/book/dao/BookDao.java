@@ -21,6 +21,17 @@ import cn.itcast.jdbc.TxQueryRunner;
 
 public class BookDao {
 	private QueryRunner qr = new TxQueryRunner();
+	/**
+	 * 查询指定分类下图书的个数
+	 * @param cid
+	 * @return
+	 * @throws SQLException
+	 */
+	public int findBookCountByCategory(String cid) throws SQLException {
+		String sql = "select count(*) from t_book where cid=?";
+		Number cnt = (Number)qr.query(sql, new ScalarHandler(), cid);
+		return cnt == null ? 0 : cnt.intValue();
+	}
 	/*
 	 * 按bid查询
 	 */

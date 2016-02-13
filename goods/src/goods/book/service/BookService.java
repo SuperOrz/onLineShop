@@ -8,6 +8,19 @@ import goods.page.PageBean;
 
 public class BookService {
 	private BookDao bookDao = new BookDao();
+	/**
+	 * 返回当前分类下图书个数
+	 * @param cid
+	 * @return
+	 */
+	public int findBookCountByCategory(String cid) {
+		try {
+			return bookDao.findBookCountByCategory(cid);
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	/*
 	 * 按bid查询
 	 */
