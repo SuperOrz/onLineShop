@@ -82,4 +82,15 @@ public class BookService {
 			throw new RuntimeException(e);
 		}
 	}
+	/**
+	 * 添加图书
+	 * @param book
+	 */
+	public void add(Book book){
+		try {
+			bookDao.add(book);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

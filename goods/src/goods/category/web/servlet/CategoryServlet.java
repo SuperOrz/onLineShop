@@ -16,7 +16,14 @@ import cn.itcast.servlet.BaseServlet;
  */
 public class CategoryServlet extends BaseServlet {
 	private CategoryService categoryService = new CategoryService();
-	
+	/**
+	 * 加载所有分类
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public String findAll(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		List<Category> parents = categoryService.findAll();

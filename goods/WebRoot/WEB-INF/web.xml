@@ -64,6 +64,20 @@
     <servlet-name>AdminCategoryServlet</servlet-name>
     <servlet-class>goods.admin.category.web.servlet.AdminCategoryServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AdminBookServlet</servlet-name>
+    <servlet-class>goods.admin.book.web.servlet.AdminBookServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AdminAddBookServlet</servlet-name>
+    <servlet-class>goods.admin.book.web.servlet.AdminAddBookServlet</servlet-class>
+  </servlet>
+
+
 
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
@@ -72,5 +86,13 @@
   <servlet-mapping>
     <servlet-name>AdminCategoryServlet</servlet-name>
     <url-pattern>/admin/AdminCategoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminBookServlet</servlet-name>
+    <url-pattern>/admin/AdminBookServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddBookServlet</servlet-name>
+    <url-pattern>/admin/AdminAddBookServlet</url-pattern>
   </servlet-mapping>
 </web-app>

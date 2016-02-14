@@ -36,10 +36,15 @@ public class BookDao {
 	 * 按bid查询
 	 */
 	public Book findByBid(String bid) throws SQLException{
-		String sql = "select * from t_book where bid = ?";
+		String sql = "select * from t_book b,t_category c where b.cid=c.cid and bid = ?";
 		Map<String, Object> map = qr.query(sql, new MapHandler(),bid);
 		Book book = CommonUtils.toBean(map, Book.class);
 		Category category = CommonUtils.toBean(map, Category.class);
+		if(map.get("pid")!=null){
+			Category parent = new Category();
+			parent.setCid((String) map.get("pid"));
+			category.setParent(parent);
+		}
 		book.setCategory(category);
 		return book;
 	}
@@ -123,5 +128,23 @@ public class BookDao {
 		pageBean.setTr(tr);
 		pageBean.setBeanList(beanList);
 		return pageBean;
+	}
+	/**
+	 * 添加图书
+	 * @param book
+	 * @throws SQLException 
+	 */
+	public void add(Book book) throws SQLException {
+		String sql = "insert into t_book(bid,bname,author,price,currPrice," +
+				"discount,press,publishtime,edition,pageNum,wordNum,printtime," +
+				"booksize,paper,cid,image_w,image_b)" +
+				" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] params = {book.getBid(),book.getBname(),book.getAuthor(),
+				book.getPrice(),book.getCurrPrice(),book.getDiscount(),
+				book.getPress(),book.getPublishtime(),book.getEdition(),
+				book.getPageNum(),book.getWordNum(),book.getPrinttime(),
+				book.getBooksize(),book.getPaper(), book.getCategory().getCid(),
+				book.getImage_w(),book.getImage_b()};
+		qr.update(sql, params);
 	}
 }
