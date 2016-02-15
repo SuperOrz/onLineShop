@@ -22,6 +22,32 @@ import cn.itcast.jdbc.TxQueryRunner;
 public class BookDao {
 	private QueryRunner qr = new TxQueryRunner();
 	/**
+	 * 删除图书
+	 * @param bid
+	 * @throws SQLException
+	 */
+	public void delete(String bid) throws SQLException{
+		String sql = "delete  from t_book where bid = ?";
+		qr.update(sql,bid);
+	}
+	/**
+	 * 修改图书信息
+	 * @param book
+	 * @throws SQLException
+	 */
+	public void edit(Book book) throws SQLException {
+		String sql = "update t_book set bname=?,author=?,price=?,currPrice=?," +
+				"discount=?,press=?,publishtime=?,edition=?,pageNum=?,wordNum=?," +
+				"printtime=?,booksize=?,paper=?,cid=? where bid=?";
+		Object[] params = {book.getBname(),book.getAuthor(),
+				book.getPrice(),book.getCurrPrice(),book.getDiscount(),
+				book.getPress(),book.getPublishtime(),book.getEdition(),
+				book.getPageNum(),book.getWordNum(),book.getPrinttime(),
+				book.getBooksize(),book.getPaper(), 
+				book.getCategory().getCid(),book.getBid()};
+		qr.update(sql, params);
+	}
+	/**
 	 * 查询指定分类下图书的个数
 	 * @param cid
 	 * @return

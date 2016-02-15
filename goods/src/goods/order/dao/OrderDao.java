@@ -92,6 +92,29 @@ public class OrderDao {
 		expList.add(e);
 		return findByCriteria(expList, pc);
 	}
+	/**
+	 * 安定单状态查询
+	 * @param uid
+	 * @param pc
+	 * @return
+	 * @throws SQLException
+	 */
+	public PageBean<Order> findByStatus(int status, int pc) throws SQLException{
+		List<Expression> expList = new ArrayList<Expression>();
+		Expression e = new Expression("status","=",status+"");
+		expList.add(e);
+		return findByCriteria(expList, pc);
+	}
+	/**
+	 * 所有订单
+	 * @param pc
+	 * @return
+	 * @throws SQLException
+	 */
+	public PageBean<Order> findAll(int pc) throws SQLException{
+		List<Expression> expList = new ArrayList<Expression>();
+		return findByCriteria(expList, pc);
+	}
 	private PageBean<Order> findByCriteria(List<Expression> expList,int pc) throws SQLException{
 		int ps = Constants.ORDER_PAGE_SIZE;
 		//查询总记录数

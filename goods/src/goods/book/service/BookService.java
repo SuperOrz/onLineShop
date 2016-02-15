@@ -9,6 +9,28 @@ import goods.page.PageBean;
 public class BookService {
 	private BookDao bookDao = new BookDao();
 	/**
+	 * 删除图书
+	 * @param bid
+	 */
+	public void delete(String bid){
+		try {
+			bookDao.delete(bid);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	/**
+	 * 修改图书信息
+	 * @param book
+	 */
+	public void edit(Book book){
+		try {
+			bookDao.edit(book);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	/**
 	 * 返回当前分类下图书个数
 	 * @param cid
 	 * @return

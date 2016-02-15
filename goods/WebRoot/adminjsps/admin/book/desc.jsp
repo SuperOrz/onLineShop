@@ -42,6 +42,14 @@ $(function() {
 		}
 	});
 });
+function editForm(){
+	$("#method").val("edit");
+	$("#form").submit();
+}
+function delForm(){
+	$("#method").val("delete");
+	$("#form").submit();
+}
 
 </script>
   </head>
@@ -91,10 +99,9 @@ $(function() {
   
   <div id='formDiv'>
    <div class="sm">&nbsp;</div>
-   <form action="javascript:alert('编辑或删除图书成功！')" method="post" id="form">
-   	<input type="hidden" name="bid" value=""/>
-   	<input type="hidden" name="image_w" value=""/>
-   	<input type="hidden" name="image_b" value=""/>
+   <form action="<c:url value='/admin/AdminBookServlet'/>"method="post" id="form">
+   <input type="hidden" name="method" id="method"/>
+   	<input type="hidden" name="bid" value="${book.bid }"/>
     <img align="top" src="<c:url value='/${book.image_w }'/>" class="tp"/>
     <div style="float:left;">
 	    <ul>

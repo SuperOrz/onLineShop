@@ -1,8 +1,10 @@
 package goods.admin.book.web.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -114,6 +116,36 @@ public class AdminBookServlet extends BaseServlet {
 			url = url.substring(0, index);
 		}
 		return url;
+	}
+	public String delete(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String bid = req.getParameter("bid");
+		Book book = bookService.load(bid);
+		//删除图片
+		String path = this.getServletContext().getRealPath("/");
+		new File(path, book.getImage_w()).delete();
+		new File(path, book.getImage_b()).delete();
+		bookService.delete(bid);
+		req.setAttribute("msg", "删除成功");
+		return "f:/adminjsps/msg.jsp";
+	}
+	/**
+	 * 修改图书信息
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public String edit(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		Map map = req.getParameterMap();
+		Book book = CommonUtils.toBean(map, Book.class);
+		Category category = CommonUtils.toBean(map, Category.class);
+		book.setCategory(category);
+		bookService.edit(book);
+		req.setAttribute("msg", "修改成功！");
+		return "f:/adminjsps/msg.jsp";
 	}
 	/**
 	 * 按bid查询
